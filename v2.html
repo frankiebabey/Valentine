@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Special</title>
+  <style>
+    body {
+      background-color: #f8d7da;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #heart-img {
+      width: 150px;
+    }
+
+    #message {
+      font-size: 24px;
+      margin-top: 20px;
+      color: #721c24;
+    }
+
+    #options {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .option-btn {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: transform 0.5s;
+    }
+
+    .option-btn:hover {
+      transform: scale(1.1);
+    }
+
+    #yes-option {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    #no-option {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      background-color: transparent;
+      z-index: 2;
+      text-align: left;
+      padding: 20px;
+      border-radius: 0;
+    }
+
+    #popup img {
+      width: 150px;
+      border-radius: 50%;
+    }
+
+    #popup-message {
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img id="heart-img" src="R.gif" alt="Heart Image">
+    <h1 id="message">Will you be my valentine?</h1>
+    <div id="options">
+      <button id="yes-option" class="option-btn" onclick="openYesPage()">Yes</button>
+      <button id="no-option" class="option-btn" onclick="increaseNoOption()">No</button>
+    </div>
+  </div>
+
+  <div id="popup">
+    <img src="T.gif" alt="Cute Image">
+    <p id="popup-message"></p>
+  </div>
+
+  <script>
+    let yesButtonSize = 1;
+
+    function openYesPage() {
+      window.location.href = "yes_page.html";
+    }
+
+    function increaseNoOption() {
+      const cuteNoImages = [
+        "A.gif",
+        // Add more images as needed
+      ];
+
+      const randomImage = cuteNoImages[Math.floor(Math.random() * cuteNoImages.length)];
+      const popupImage = document.getElementById("popup").getElementsByTagName("img")[0];
+      popupImage.src = randomImage;
+
+      // Show popup to the right of the "No" option
+      const noButtonRect = document.getElementById("no-option").getBoundingClientRect();
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+      popup.style.left = `${noButtonRect.right + 10}px`;
+      popup.style.top = `${noButtonRect.top}px`;
+
+      // Display text in the "No" popup
+      const cuteMessages = [
+        "Aww, that's okay! You're still special.",
+        "Maybe next time? 😊",
+        "No worries! Happy Valentine's Day!",
+        "You're too cool for Valentine's, anyway!",
+        "Your friendship means the world to me!",
+        "You're fantastic just the way you are!",
+        "The stars would envy your shine!",
+        "You bring joy to my heart!",
+      ];
+      const randomMessage = cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
+      document.getElementById("popup-message").innerText = randomMessage;
+
+      // Increase the size of the Yes option at a faster rate
+      yesButtonSize += 0.5; // Adjust the increment value for faster increase
+      document.getElementById("yes-option").style.transform = `scale(${yesButtonSize})`;
+    }
+  </script>
+</body>
+</html>
